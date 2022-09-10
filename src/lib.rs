@@ -117,12 +117,12 @@ pub struct Deserializer<'a, 'b, D, F: 'b> {
 
 pub trait Inner {
     type Inner;
-    fn inner() -> Self::Inner;
+    fn inner(&self) -> Self::Inner;
 }
 
 impl<'a, 'b, D, F> Inner for Deserializer<'a, 'b, D, F> {
     type Inner = D;
-    fn inner() -> Self::Inner {
+    fn inner(&self) -> Self::Inner {
         self.de
     }
 }

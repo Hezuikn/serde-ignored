@@ -115,6 +115,17 @@ pub struct Deserializer<'a, 'b, D, F: 'b> {
     path: Path<'a>,
 }
 
+trait Inner {
+    type Inner;
+    fn inner() -> Self::Inner;
+}
+impl<'a, 'b, D, F> Inner for Deserializer<'a, 'b, D, F> {
+    type Inner = D;
+    fn inner() -> Self::Inner {
+        self.de
+    }
+}
+
 impl<'a, 'b, D, F> Deserializer<'a, 'b, D, F>
 where
     F: FnMut(Path),
